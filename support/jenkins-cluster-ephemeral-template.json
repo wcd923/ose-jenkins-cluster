@@ -424,7 +424,7 @@
         {
             "name": "JENKINS_PASSWORD",
             "description": "Password for the Jenkins user",
-            "value": "password",
+            "value": "admin",
             "generate": "expression"
         },
         {
