@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/rhel7/rhel:latest 
+FROM registry.access.redhat.com/rhel7/rhel:latest
 
 ENV JENKINS_SWARM_VERSION 2.0
 ENV JNLP_SLAVE_VERSION 2.52
@@ -26,7 +26,14 @@ RUN curl --create-dirs -sSLo /opt/jenkins-slave/bin/swarm-client-$JENKINS_SWARM_
 WORKDIR /var/lib/jenkins
 
 VOLUME /var/lib/jenkins
+VOLUME /var/run/docker.sock
 
-USER 1001
+RUN yum install -y yum-utils device-mapper-persistent-data lvm2
+RUN yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+RUN yum makecache fast && yum -y install docker-ce
+RUN systemctl start docker
+
+#USER 1001
+USER root
 
 ENTRYPOINT ["/opt/jenkins-slave/bin/jenkins-slave.sh"]
