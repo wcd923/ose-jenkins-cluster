@@ -28,11 +28,11 @@ WORKDIR /var/lib/jenkins
 VOLUME /var/lib/jenkins
 VOLUME /var/run/docker.sock
 
-RUN yum install epel-release && yum makecache fast
 RUN yum install -y yum-utils 
-RUN yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && yum-config-manager --enabel all
-RUN yum makecache fast && yum -y install device-mapper-persistent-data lvm2 docker-ce 
-RUN systemctl start docker
+RUN yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 
+#RUN yum makecache fast && yum -y install device-mapper-persistent-data lvm2 docker-ce 
+#RUN systemctl start docker
+VOLUME /bin
 
 #USER 1001
 USER root
