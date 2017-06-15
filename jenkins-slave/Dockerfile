@@ -26,14 +26,15 @@ RUN curl --create-dirs -sSLo /opt/jenkins-slave/bin/swarm-client-$JENKINS_SWARM_
 WORKDIR /var/lib/jenkins
 
 VOLUME /var/lib/jenkins
-VOLUME /var/run/docker.sock
+#VOLUME /var/run/docker.sock
 
 RUN yum install -y yum-utils 
 RUN yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 
 #RUN yum makecache fast && yum -y install device-mapper-persistent-data lvm2 docker-ce 
 #RUN systemctl start docker
 VOLUME /bin
-
+RUN mkdir -p /var/run/docker.sock 
+VOLUME /var/run/docker.sock
 #USER 1001
 USER root
 
