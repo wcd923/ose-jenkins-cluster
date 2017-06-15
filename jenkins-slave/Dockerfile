@@ -37,5 +37,7 @@ RUN mkdir -p /var/run/docker.sock
 VOLUME /var/run/docker.sock
 #USER 1001
 USER root
+COPY oc /bin
+RUN export PATH=$PATH:/bin/oc
 
 ENTRYPOINT ["/opt/jenkins-slave/bin/jenkins-slave.sh"]
